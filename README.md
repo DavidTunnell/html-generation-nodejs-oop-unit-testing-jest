@@ -4,15 +4,21 @@ This application takes a series of prompts about members of a software developme
 
 It uses the following structure:
 
-* assets/ - css and image files
-* test/ - jest tests
-* dist/ - rendered output HTML and CSS style sheet
+* docs/ - rendered output HTML and CSS style sheet - folder name would normally be dist/ but this allows GitHub pages to render it an example can be linked below
 * lib/ - classes
 * src/ - template helper code
+* test/ - jest tests
 * index.js - runs the application
 
 The generated HTML and CSS file use [Bulma](https://bulma.io/) for a CSS styling library, [Bulma Modal Cards Template](https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/modal-cards.html), for additional styling, [FontAwesome](https://fontawesome.com/) for icons, and [Unsplash](https://source.unsplash.com/) for random related images. The images would be replaced with images of the employees.
 
+An example of the output can be seen here: 
+
+# Install
+
+You will need to run `npm install` to get the required node modules that can be seen in package.json. You can then run the application via command line while in the root project directory with `node ./index.js`. Test can be run by ...
+
+# Screenshot
 
 # 10 Object-Oriented Programming: Team Profile Generator
 
