@@ -4,20 +4,12 @@ This application takes a series of prompts about members of a software developme
 
 It uses the following structure:
 
-assets/             // css and image files
-test/			    // jest tests
-  Employee.test.js
-  Engineer.test.js
-  Intern.test.js
-  Manager.test.js
-dist/               // rendered output HTML and CSS style sheet
-lib/				// classes
-  Employee.js
-  Engineer.js
-  Intern.js
-  Manager.js
-src/				// template helper code
-index.js			// runs the application
+* assets/ - css and image files
+* test/ - jest tests
+* dist/ - rendered output HTML and CSS style sheet
+* lib/ - classes
+* src/ - template helper code
+* index.js - runs the application
 
 The generated HTML and CSS file use [Bulma](https://bulma.io/) for a CSS styling library, [Bulma Modal Cards Template](https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/modal-cards.html), for additional styling, [FontAwesome](https://fontawesome.com/) for icons, and [Unsplash](https://source.unsplash.com/) for random related images. The images would be replaced with images of the employees.
 
