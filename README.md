@@ -4,7 +4,8 @@ This application takes a series of prompts about members of a software developme
 
 It uses the following structure:
 
-`test/			    // jest tests
+assets/             // css and image files
+test/			    // jest tests
   Employee.test.js
   Engineer.test.js
   Intern.test.js
@@ -16,7 +17,7 @@ lib/				// classes
   Intern.js
   Manager.js
 src/				// template helper code
-index.js			// runs the application`
+index.js			// runs the application
 
 
 # 10 Object-Oriented Programming: Team Profile Generator
@@ -145,7 +146,7 @@ This homework is graded based on the following criteria:
 
 ### Deliverables: 15%
 
-* A sample HTML file generated using the application must be submitted.
+* A sample HTML file generated using the application must be submitted. <<<<>>>>
 
 * Your GitHub repository containing your application code.
 
