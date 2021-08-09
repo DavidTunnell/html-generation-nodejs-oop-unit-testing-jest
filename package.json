@@ -1,0 +1,25 @@
+{
+  "name": "html-generation-nodejs-oop-unit-testing-jest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidTunnell/html-generation-nodejs-oop-unit-testing-jest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidTunnell/html-generation-nodejs-oop-unit-testing-jest/issues"
+  },
+  "homepage": "https://github.com/DavidTunnell/html-generation-nodejs-oop-unit-testing-jest#readme",
+  "dependencies": {
+    "inquirer": "^8.1.2"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
