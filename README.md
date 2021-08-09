@@ -1,6 +1,6 @@
 # OOP HTML Generator via Node.js with Jest Unit Testing
 
-This application takes a series of prompts about members of a software development team and then generates an HTML page with summaries of each person. The input is taken via a node console application using the inquirer package and has jest based unit testing. 
+This application takes a series of prompts about members of a software development team and then generates an webpage with summaries of each person. The input is taken via a node console application using the [Inquirer](https://www.npmjs.com/package/inquirer) package and has [Jest](https://www.npmjs.com/package/jest) based unit testing. 
 
 It uses the following structure:
 
@@ -10,7 +10,7 @@ test/			    // jest tests
   Engineer.test.js
   Intern.test.js
   Manager.test.js
-dist/               // rendered output (HTML) and CSS style sheet
+dist/               // rendered output HTML and CSS style sheet
 lib/				// classes
   Employee.js
   Engineer.js
@@ -18,6 +18,8 @@ lib/				// classes
   Manager.js
 src/				// template helper code
 index.js			// runs the application
+
+The generated HTML and CSS file use [Bulma](https://bulma.io/) for a CSS styling library, [Bulma Modal Cards Template](https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/modal-cards.html), for additional styling, [FontAwesome](https://fontawesome.com/) for icons, and [Unsplash](https://source.unsplash.com/) for random related images. The images would be replaced with images of the employees.
 
 
 # 10 Object-Oriented Programming: Team Profile Generator
