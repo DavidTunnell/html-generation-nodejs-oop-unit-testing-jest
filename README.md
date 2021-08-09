@@ -10,6 +10,8 @@ It uses the following structure:
 * test/ - jest tests
 * index.js - runs the application
 
+When generating this project the commands `npm i inquirer` and `npm i jest --save-dev` were used. Use installation instructions below however.
+
 The generated HTML and CSS files use [Bulma](https://bulma.io/) for a CSS styling library, [Bulma Modal Cards Template](https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/modal-cards.html), for additional styling, [FontAwesome](https://fontawesome.com/) for icons, and [Unsplash](https://source.unsplash.com/) for random related images. The images would be replaced with images of the employees.
 
 An example of the output can be seen here: https://davidtunnell.github.io/html-generation-nodejs-oop-unit-testing-jest/
