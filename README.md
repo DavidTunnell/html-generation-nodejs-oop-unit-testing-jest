@@ -10,15 +10,20 @@ It uses the following structure:
 * test/ - jest tests
 * index.js - runs the application
 
-The generated HTML and CSS file use [Bulma](https://bulma.io/) for a CSS styling library, [Bulma Modal Cards Template](https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/modal-cards.html), for additional styling, [FontAwesome](https://fontawesome.com/) for icons, and [Unsplash](https://source.unsplash.com/) for random related images. The images would be replaced with images of the employees.
+The generated HTML and CSS files use [Bulma](https://bulma.io/) for a CSS styling library, [Bulma Modal Cards Template](https://github.com/BulmaTemplates/bulma-templates/blob/master/templates/modal-cards.html), for additional styling, [FontAwesome](https://fontawesome.com/) for icons, and [Unsplash](https://source.unsplash.com/) for random related images. The images would be replaced with images of the employees.
 
-An example of the output can be seen here: 
+An example of the output can be seen here: https://davidtunnell.github.io/html-generation-nodejs-oop-unit-testing-jest/
 
-# Install
+## Install
 
 You will need to run `npm install` to get the required node modules that can be seen in package.json. You can then run the application via command line while in the root project directory with `node ./index.js`. Test can be run by ...
 
-# Screenshot
+## Screenshot
+
+
+
+
+---
 
 # 10 Object-Oriented Programming: Team Profile Generator
 
