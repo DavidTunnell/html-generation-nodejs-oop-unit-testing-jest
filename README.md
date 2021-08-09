@@ -1,3 +1,24 @@
+# OOP HTML Generator via Node.js with Jest Unit Testing
+
+This application takes a series of prompts about members of a software development team and then generates an HTML page with summaries of each person. The input is taken via a node console application using the inquirer package and has jest based unit testing. 
+
+It uses the following structure:
+
+`test/			    // jest tests
+  Employee.test.js
+  Engineer.test.js
+  Intern.test.js
+  Manager.test.js
+dist/               // rendered output (HTML) and CSS style sheet
+lib/				// classes
+  Employee.js
+  Engineer.js
+  Intern.js
+  Manager.js
+src/				// template helper code
+index.js			// runs the application`
+
+
 # 10 Object-Oriented Programming: Team Profile Generator
 
 ## Your Task
@@ -59,13 +80,17 @@ node index.js
 It is recommended that you start with a directory structure that looks like the following example:
 
 ```md
-__tests__/			// jest tests
+test/			    // jest tests
   Employee.test.js
   Engineer.test.js
   Intern.test.js
   Manager.test.js
 dist/               // rendered output (HTML) and CSS style sheet
 lib/				// classes
+  Employee.js
+  Engineer.js
+  Intern.js
+  Manager.js
 src/				// template helper code
 index.js			// runs the application
 ```
