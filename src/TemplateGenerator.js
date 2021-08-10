@@ -31,13 +31,13 @@ class TemplateGenerator {
             // https://stackoverflow.com/questions/10314338/get-name-of-object-or-class
             const currentObjectType = employee.constructor.name;
             if (currentObjectType == "Manager") {
-                employeeDetails = this.getHtmlManagerDetails(employee.id, employee.email, employee.getOfficeNumber());
+                employeeDetails = this.getHtmlManagerDetails(employee.getId(), employee.getEmail(), employee.getOfficeNumber());
             } else if (currentObjectType == "Engineer") {
-                employeeDetails = this.getHtmlEngineerDetails(employee.id, employee.email, employee.gitHub);
+                employeeDetails = this.getHtmlEngineerDetails(employee.getId(), employee.getEmail(), employee.getGitHub());
             } else if (currentObjectType == "Intern") {
-                employeeDetails = this.getHtmlInternDetails(employee.id, employee.email, employee.school);
+                employeeDetails = this.getHtmlInternDetails(employee.getId(), employee.getEmail(), employee.getSchool());
             }
-            innerHtml += this.getHtmlEmployeeString(employee.employeeName, employee.description, employee.imageUrl, employeeDetails);
+            innerHtml += this.getHtmlEmployeeString(employee.getName(), employee.description, employee.imageUrl, employeeDetails);
         }
         return `
         <!DOCTYPE html>
