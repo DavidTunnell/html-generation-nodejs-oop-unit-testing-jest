@@ -13,30 +13,59 @@ class TemplateGenerator {
     //'./src/hero.css'
     getCssString() {
         const text = fs.readFileSync("./src/hero.css", 'utf8');
-        return (text.replace(/\s/g, ''));
+        return (text.replace(/\s+/g, ' '));
     };
 
-    //TODO
-    wrapInDivForNextRow() {
-        return `<div class="columns features "></a>`;
+    //every 3 need to be wrapped in html
+    wrapInParentHtml(htmlObjectArray) {
+        var newData = [];
+        let innerHtml = "";
+        if (htmlObjectArray.length > 3) {
+            // https://stackoverflow.com/questions/63462236/merge-every-3-elements-in-array-javascript
+            for (let i = 0; i < htmlObjectArray.length; i += 3) { // i+=3 can solve your problem
+                let three = ""; //htmlObjectArray[i] + htmlObjectArray[i + 1] + htmlObjectArray[i + 2]
+                // don't pass the ones that aren't null
+                if (htmlObjectArray[i]) {
+                    three += htmlObjectArray[i];
+                }
+                if (htmlObjectArray[i + 1]) {
+                    three += htmlObjectArray[i + 1];
+                }
+                if (htmlObjectArray[i + 2]) {
+                    three += htmlObjectArray[i + 2];
+                }
+                newData.push(three)
+            }
+            for (const setOfHtml of newData) {
+                innerHtml += `<div class='columns features'>${setOfHtml}</div>`;
+            }
+            return innerHtml;
+        } else {
+            return `<div class='columns features'>${htmlObjectArray}</div>`;
+        }
     };
 
     //return outer html template
     getHtmlTemplateString(employeesObjectArray) {
-        let innerHtml = "";
         let employeeDetails = "";
+        let iconHtml = "";
+        const returnedHtmlObjects = [];
         for (const employee of employeesObjectArray) {
             // https://stackoverflow.com/questions/10314338/get-name-of-object-or-class
-            const currentObjectType = employee.constructor.name;
-            if (currentObjectType == "Manager") {
+            const currentObjectTypeName = employee.constructor.name;
+            if (currentObjectTypeName == "Manager") {
                 employeeDetails = this.getHtmlManagerDetails(employee.getId(), employee.getEmail(), employee.getOfficeNumber());
-            } else if (currentObjectType == "Engineer") {
+                iconHtml = "<i class='fas fa-tasks'></i>";
+            } else if (currentObjectTypeName == "Engineer") {
                 employeeDetails = this.getHtmlEngineerDetails(employee.getId(), employee.getEmail(), employee.getGitHub());
-            } else if (currentObjectType == "Intern") {
+                iconHtml = "<i class='fas fa-laptop-code'></i>";
+            } else if (currentObjectTypeName == "Intern") {
                 employeeDetails = this.getHtmlInternDetails(employee.getId(), employee.getEmail(), employee.getSchool());
+                iconHtml = "<i class='fas fa-glasses'></i>";
             }
-            innerHtml += this.getHtmlEmployeeString(employee.getName(), employee.description, currentObjectType, employee.imageUrl, employeeDetails);
+            returnedHtmlObjects.push(this.getHtmlEmployeeString(employee.getName(), employee.getDescription(), iconHtml, currentObjectTypeName, employee.getImageUrl(), employeeDetails));
         }
+        const innerHtml = this.wrapInParentHtml(returnedHtmlObjects);
         return `
         <!DOCTYPE html>
         <html>
@@ -60,16 +89,14 @@ class TemplateGenerator {
                     </div>
                 </section>
                 <section class="container">
-                    <div class="columns features">
                     ${innerHtml}
-                    </div>
                 </section>
             </body>
         </html>`.replace(/\s+/g, ' ');
     };
 
     //return manager html template
-    getHtmlEmployeeString(name, description, title, imageUrl, employeeDetails) {
+    getHtmlEmployeeString(name, description, iconHtml, title, imageUrl, employeeDetails) {
         const isValidUrl = this.isImageUrlValid(imageUrl);
         let urlGettingPassed;
         if (isValidUrl) {
@@ -88,7 +115,7 @@ class TemplateGenerator {
                 <div class="card-content">
                     <div class="content">
                         <h4>${name}</h4>
-                        <h2><i class="fas fa-tasks"></i> ${title}</h2>
+                        <h2>${iconHtml} ${title}</h2>
                         <p>${description}</p>
                         ${employeeDetails}
                     </div>

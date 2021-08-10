@@ -2,7 +2,7 @@
 
 This application takes a series of prompts about members of a software development team and then generates an webpage with summaries of each person. The input is taken via a node console application using the [Inquirer](https://www.npmjs.com/package/inquirer) package and has [Jest](https://www.npmjs.com/package/jest) based unit testing. 
 
-The questions have the following structure. They will ask for at least one of each, a manager, an engineer, and an intern with the ability to repeat how many of each you want to enter.
+The questions have the following structure. They will ask for at least one of each, a manager, an engineer, and an intern with the ability to repeat how many of each you want to enter. There is validation for images and if an invalid image is entered then a default one will be added.
 
 It uses the following structure:
 
