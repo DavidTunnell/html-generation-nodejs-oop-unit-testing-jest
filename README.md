@@ -24,7 +24,10 @@ You will need to run `npm install` to get the required node modules that can be 
 
 ## Screenshot
 
--- quality comments!!!!
+
+## Video Walkthrough
+[![Everything Is AWESOME](http://i.imgur.com/Ot5DWAW.png)](https://youtu.be/StTqXEQ2l-Y?t=35s "Everything Is AWESOME")
+
 -tests!!!!!!!!!!
 
 deliverables:
