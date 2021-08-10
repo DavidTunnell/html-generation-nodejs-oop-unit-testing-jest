@@ -37,11 +37,11 @@ class TemplateGenerator {
                 newData.push(three)
             }
             for (const setOfHtml of newData) {
-                innerHtml += `<div class='columns features'>${setOfHtml}</div>`;
+                innerHtml += `<div class='columns features is-centered'>${setOfHtml}</div>`;
             }
             return innerHtml;
         } else {
-            return `<div class='columns features'>${htmlObjectArray}</div>`;
+            return `<div class='columns features is-centered'>${htmlObjectArray}</div>`;
         }
     };
 
@@ -105,7 +105,7 @@ class TemplateGenerator {
             urlGettingPassed = "https://source.unsplash.com/800x600/?professional";
         }
         return `
-        <div class="column">
+        <div class="column is-one-third">
             <div class="card is-shady">
                 <div class="card-image">
                     <figure class="image">

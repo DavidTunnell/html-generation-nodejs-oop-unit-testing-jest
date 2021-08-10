@@ -160,12 +160,12 @@ const getInternPrompts = () => {
         {
             type: "input",
             name: "internDescription",
-            message: "What is the manager's description?"
+            message: "What is the intern's description?"
         },
         {
             type: "input",
             name: "internImageUrl",
-            message: "What is the manager's image URL?"
+            message: "What is the intern's image URL?"
         },
         {
             type: "input",
