@@ -1,3 +1,4 @@
+//required dependencies
 const inquirer = require('inquirer');
 const fs = require('fs');
 const TemplateGenerator = require('./src/TemplateGenerator.js');
@@ -5,13 +6,17 @@ const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
 const Manager = require('./lib/Manager.js');
 
+//options
 const outputLocation = "./docs/";
 
+//run on command: 'node index.js' 
 const main = async() => {
     const employees = [];
-    //get inputs for variable amount of managers, engineers and interns
+
     console.log("Welcome to the software team website generator utility. Please answer the following questions about the teams manager.");
+    //get inputs for variable amount of managers, engineers and interns
     const managerInputs = await collectInputs([], getManagerPrompts());
+    //iterate over the entries and assign them to manager objects, then add to employees array
     for (const element of managerInputs) {
         const manager = new Manager();
         manager.employeeName = element.managerName;
@@ -47,6 +52,7 @@ const main = async() => {
         employees.push(intern);
     }
     console.log("Generating HTML and CSS file in ./docs/. Please open ./doc/index.html to see the results.");
+    //get an instance of template generator and use the HTML and CSS it generates to create files
     const templateGenerator = new TemplateGenerator(employees);
     writeFile(outputLocation + "hero.css", templateGenerator.cssString);
     writeFile(outputLocation + "index.html", templateGenerator.htmlString);
@@ -69,6 +75,7 @@ const collectInputs = async(inputs = [], prompts) => {
     return again ? collectInputs(newInputs, prompts) : newInputs;
 };
 
+//prompts object for manager questions
 const getManagerPrompts = () => {
     const prompts = [{
             type: "input",
@@ -110,6 +117,7 @@ const getManagerPrompts = () => {
     return prompts;
 };
 
+//prompts object for engineer questions
 const getEngineerPrompts = () => {
     const prompts = [{
             type: "input",
@@ -151,6 +159,7 @@ const getEngineerPrompts = () => {
     return prompts;
 };
 
+//prompts object for intern questions
 const getInternPrompts = () => {
     const prompts = [{
             type: "input",
@@ -192,4 +201,5 @@ const getInternPrompts = () => {
     return prompts;
 };
 
+//run main on startup
 main();
