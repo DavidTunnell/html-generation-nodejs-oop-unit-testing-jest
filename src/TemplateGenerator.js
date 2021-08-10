@@ -1,27 +1,44 @@
 const fs = require('fs');
+const Engineer = require('../lib/Engineer.js');
+const Intern = require('../lib/Intern.js');
+const Manager = require('../lib/Manager.js');
 
 class TemplateGenerator {
     // set default values
-    constructor(userInput) {
-      this.userInput = userInput;
-      this.cssString = this.getCssString();
-      this.htmlString = this.getHtmlTemplateString("test777");
+    constructor(employeesObjectArray) {
+        // this.employeesObjectArray = employeesObjectArray;
+        this.cssString = this.getCssString();
+        this.htmlString = this.getHtmlTemplateString(employeesObjectArray);
     }
 
     //return css file contents as string without spaces
     //'./src/hero.css'
     getCssString() {
-        const text = fs.readFileSync("./src/hero.css",'utf8');
+        const text = fs.readFileSync("./src/hero.css", 'utf8');
         return (text.replace(/\s/g, ''));
     };
 
     //TODO
-    wrapInDivForNextRow () {
+    wrapInDivForNextRow() {
         return `<div class="columns features "></a>`;
     };
 
     //return outer html template
-    getHtmlTemplateString(innerHtml) {
+    getHtmlTemplateString(employeesObjectArray) {
+        let innerHtml = "";
+        let employeeDetails = "";
+        for (const employee of employeesObjectArray) {
+            // https://stackoverflow.com/questions/10314338/get-name-of-object-or-class
+            const currentObjectType = employee.constructor.name;
+            if (currentObjectType == "Manager") {
+                employeeDetails = this.getHtmlManagerDetails(employee.id, employee.email, employee.getOfficeNumber());
+            } else if (currentObjectType == "Engineer") {
+                employeeDetails = this.getHtmlEngineerDetails(employee.id, employee.email, employee.gitHub);
+            } else if (currentObjectType == "Intern") {
+                employeeDetails = this.getHtmlInternDetails(employee.id, employee.email, employee.school);
+            }
+            innerHtml += this.getHtmlEmployeeString(employee.employeeName, employee.description, employee.imageUrl, employeeDetails);
+        }
         return `
         <!DOCTYPE html>
         <html>
@@ -50,16 +67,12 @@ class TemplateGenerator {
                     </div>
                 </section>
             </body>
-        </html>`;
+        </html>`.replace(/\s+/g, ' ');
     };
 
     //return manager html template
-    getHtmlEmployeeString (name, description, imageUrl, id, email, gitHub) {
+    getHtmlEmployeeString(name, description, imageUrl, employeeDetails) {
         //https://source.unsplash.com/800x600/?professional
-        const employeeDetails = getHtmlEngineerDetails(id, email, gitHub);
-
-        
-
         return `
         <div class="column">
             <div class="card is-shady">
@@ -81,7 +94,18 @@ class TemplateGenerator {
     };
 
     //return Engineer html template
-    getHtmlEngineerDetails(id, email, gitHub){
+    getHtmlManagerDetails(id, email, officeNumber) {
+        //https://source.unsplash.com/800x600/?professional
+        return `
+            <ul>
+                <li>Employee #: ${id}</li>
+                <li>Email: <a href="mailto: ${email}">${email}</a></li>
+                <li>Office #: ${officeNumber}</li>
+            </ul>`;
+    };
+
+    //return Engineer html template
+    getHtmlEngineerDetails(id, email, gitHub) {
         //https://source.unsplash.com/800x600/?person
         return `
             <ul>
@@ -91,31 +115,17 @@ class TemplateGenerator {
             </ul>`;
     };
 
-    //return Intern html template
-    getHtmlInternString (){
+    //return Intern html details
+    getHtmlInternDetails(id, email, school) {
+        //https://source.unsplash.com/800x600/?office
         return `
-        <div class="column ">
-            <div class="card is-shady ">
-                <div class="card-image ">
-                    <figure class="image ">
-                        <img src="https://source.unsplash.com/800x600/?office " alt="Placeholder image ">
-                    </figure>
-                </div>
-                <div class="card-content ">
-                    <div class="content ">
-                        <h4>Clive Barker</h4>
-                        <h2><i class="fas fa-glasses "></i> Intern</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error eveniet nulla labore veniam explicabo nobis neque magni impedit, modi harum veritatis repellat eaque tempore ad maiores illo cumque consectetur saepe!</p>
-                        <ul>
-                            <li>Employee #: 3</li>
-                            <li><a href="mailto: intern@company.io ">intern@company.io</a></li>
-                            <li>University of Maryland</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+            <ul>
+                <li>Employee #: ${id}</li>
+                <li>Email: <a href="mailto: ${email}">${email}</a></li>
+                <li>School: ${school}</li>
+            </ul>`;
     };
+
 }
 
 module.exports = TemplateGenerator;

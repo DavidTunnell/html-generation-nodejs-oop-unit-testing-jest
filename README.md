@@ -2,6 +2,8 @@
 
 This application takes a series of prompts about members of a software development team and then generates an webpage with summaries of each person. The input is taken via a node console application using the [Inquirer](https://www.npmjs.com/package/inquirer) package and has [Jest](https://www.npmjs.com/package/jest) based unit testing. 
 
+The questions have the following structure. They will ask for at least one of each, a manager, an engineer, and an intern with the ability to repeat how many of each you want to enter.
+
 It uses the following structure:
 
 * docs/ - rendered output HTML and CSS style sheet - folder name would normally be dist/ but this allows GitHub pages to render it an example can be linked below

@@ -103,12 +103,12 @@ const getInternPrompts = () => {
         },
         {
             type: "input",
-            name: "managerDescription",
+            name: "internDescription",
             message: "What is the manager's description?"
         },
         {
             type: "input",
-            name: "managerImageUrl",
+            name: "internImageUrl",
             message: "What is the manager's image URL?"
         },
         {
@@ -123,8 +123,8 @@ const getInternPrompts = () => {
         },
         {
             type: "input",
-            name: "internOffice",
-            message: "What is the intern's office number?",
+            name: "internSchool",
+            message: "What is the intern's university/college?",
         },
         {
             type: "confirm",
@@ -136,10 +136,12 @@ const getInternPrompts = () => {
     return prompts;
 };
 
+
+
 const main = async() => {
     const employees = [];
     //get inputs for variable amount of managers, engineers and interns
-    console.log("Welcome to the software team website generator utility. Please answer the following questions about the first manager.");
+    console.log("Welcome to the software team website generator utility. Please answer the following questions about the teams manager.");
     const managerInputs = await collectInputs([], getManagerPrompts());
     for (const element of managerInputs) {
         const manager = new Manager();
@@ -151,16 +153,35 @@ const main = async() => {
         manager.officeNumber = element.managerOffice;
         employees.push(manager);
     }
-    console.log(employees);
+    console.log("Please answer the following questions about the teams engineer(s).");
+    const engineerInputs = await collectInputs([], getEngineerPrompts());
+    for (const element of engineerInputs) {
+        const engineer = new Engineer();
+        engineer.employeeName = element.engineerName;
+        engineer.description = element.engineerDescription;
+        engineer.imageUrl = element.engineerImageUrl;
+        engineer.id = element.engineerId;
+        engineer.email = element.engineerEmail;
+        engineer.gitHub = element.engineerGitHub;
+        employees.push(engineer);
+    }
+    console.log("Please answer the following questions about the teams intern(s).");
+    const internInputs = await collectInputs([], getInternPrompts());
+    for (const element of internInputs) {
+        const intern = new Intern();
+        intern.employeeName = element.internName;
+        intern.description = element.internDescription;
+        intern.imageUrl = element.internImageUrl;
+        intern.id = element.internId;
+        intern.email = element.internEmail;
+        intern.school = element.internSchool;
+        employees.push(intern);
+    }
+    console.log("Generating HTML and CSS file in ./docs/. Please open index.html to see the results.");
+    const templateGenerator = new TemplateGenerator(employees);
+    console.log(templateGenerator.htmlString);
 
 
-
-    // const engineerInputs = await collectInputs([], getEngineerPrompts());
-    // const internInputs = await collectInputs([], getInternPrompts());
-    // console.log(managerInputs);
-    // console.log(engineerInputs);
-    // console.log(internInputs);
-    //create employee objects and add them all
 };
 
 main();
