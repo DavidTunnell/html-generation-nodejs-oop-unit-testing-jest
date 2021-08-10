@@ -48,9 +48,11 @@ const main = async() => {
     }
     console.log("Generating HTML and CSS file in ./docs/. Please open ./doc/index.html to see the results.");
     const templateGenerator = new TemplateGenerator(employees);
+    console.log(templateGenerator);
     writeFile(outputLocation + "hero.css", templateGenerator.cssString);
     writeFile(outputLocation + "index.html", templateGenerator.htmlString);
     console.log("Process complete. Exiting.");
+    // process.exit();
 };
 
 //Write file https://nodejs.org/en/knowledge/file-system/how-to-write-files-in-nodejs/

@@ -1,8 +1,5 @@
 const fs = require('fs');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const Engineer = require('../lib/Engineer.js');
-const Intern = require('../lib/Intern.js');
-const Manager = require('../lib/Manager.js');
 
 class TemplateGenerator {
     // set default values
@@ -73,16 +70,19 @@ class TemplateGenerator {
 
     //return manager html template
     getHtmlEmployeeString(name, description, title, imageUrl, employeeDetails) {
-
-        console.log(this.imageExists(imageUrl));
-
-        //https://source.unsplash.com/800x600/?professional
+        const isValidUrl = this.isImageUrlValid(imageUrl);
+        let urlGettingPassed;
+        if (isValidUrl) {
+            urlGettingPassed = imageUrl;
+        } else {
+            urlGettingPassed = "https://source.unsplash.com/800x600/?professional";
+        }
         return `
         <div class="column">
             <div class="card is-shady">
                 <div class="card-image">
                     <figure class="image">
-                        <img src="${imageUrl}" alt="${name}">
+                        <img src="${urlGettingPassed}" alt="${name}">
                     </figure>
                 </div>
                 <div class="card-content">
@@ -130,15 +130,16 @@ class TemplateGenerator {
             </ul>`;
     };
 
-    imageExists(image_url) {
-
+    //https://stackoverflow.com/questions/18837735/check-if-image-exists-on-server-using-javascript/18837818
+    isImageUrlValid(url) {
         var http = new XMLHttpRequest();
-
-        http.open('HEAD', image_url, false);
+        http.open('HEAD', url, false);
         http.send();
-
-        return http.status != 404;
-
+        //302 is the code from unspash.com specifically for valid image URLs
+        if (http.status != 0) {
+            return true;
+        }
+        return false;
     }
 
 }
