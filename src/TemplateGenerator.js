@@ -5,7 +5,7 @@ class TemplateGenerator {
     constructor(userInput) {
       this.userInput = userInput;
       this.cssString = this.getCssString();
-      this.htmlString = this.getHtmlTemplateString();
+      this.htmlString = this.getHtmlTemplateString("test777");
     }
 
     //return css file contents as string without spaces
@@ -21,7 +21,7 @@ class TemplateGenerator {
     };
 
     //return outer html template
-    getHtmlTemplateString() {
+    getHtmlTemplateString(innerHtml) {
         return `
         <!DOCTYPE html>
         <html>
@@ -46,6 +46,7 @@ class TemplateGenerator {
                 </section>
                 <section class="container">
                     <div class="columns features">
+                    ${innerHtml}
                     </div>
                 </section>
             </body>
@@ -53,25 +54,26 @@ class TemplateGenerator {
     };
 
     //return manager html template
-    getHtmlManagerString () {
+    getHtmlEmployeeString (name, description, imageUrl, id, email, gitHub) {
+        //https://source.unsplash.com/800x600/?professional
+        const employeeDetails = getHtmlEngineerDetails(id, email, gitHub);
+
+        
+
         return `
         <div class="column">
             <div class="card is-shady">
                 <div class="card-image">
                     <figure class="image">
-                        <img src="https://source.unsplash.com/800x600/?professional" alt="Placeholder image">
+                        <img src="${imageUrl}" alt="${name}">
                     </figure>
                 </div>
                 <div class="card-content">
                     <div class="content">
-                        <h4>David Tunnell</h4>
+                        <h4>${name}</h4>
                         <h2><i class="fas fa-tasks"></i> Manager</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error eveniet nulla labore veniam explicabo nobis neque magni impedit, modi harum veritatis repellat eaque tempore ad maiores illo cumque consectetur saepe!</p>
-                        <ul>
-                            <li>Employee #: 1</li>
-                            <li>Email: <a href="mailto: manager@company.io">manager@company.io</a></li>
-                            <li>Office #: A102</li>
-                        </ul>
+                        <p>${description}</p>
+                        ${employeeDetails}
                     </div>
                 </div>
             </div>
@@ -79,29 +81,14 @@ class TemplateGenerator {
     };
 
     //return Engineer html template
-    getHtmlEngineerString (){
+    getHtmlEngineerDetails(id, email, gitHub){
+        //https://source.unsplash.com/800x600/?person
         return `
-        <div class="column">
-            <div class="card is-shady">
-                <div class="card-image">
-                    <figure class="image">
-                        <img src="https://source.unsplash.com/800x600/?person" " alt="Placeholder image ">
-                    </figure>
-                </div>
-                <div class="card-content ">
-                    <div class="content ">
-                        <h4>Clark Kent</h4>
-                        <h2><i class="fas fa-laptop-code "></i> Engineer</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error eveniet nulla labore veniam explicabo nobis neque magni impedit, modi harum veritatis repellat eaque tempore ad maiores illo cumque consectetur saepe!</p>
-                        <ul>
-                            <li>Employee #: 2</li>
-                            <li>Email: <a href="mailto: dev@company.io ">dev@company.io</a></li>
-                            <li>GitHub: <a href="https://github.com/superman/ " target="_blank ">Superman</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+            <ul>
+                <li>Employee #: ${id}</li>
+                <li>Email: <a href="mailto: ${email}">${email}</a></li>
+                <li>GitHub: <a href="https://github.com/${gitHub}/ " target="_blank ">${gitHub}</a></li>
+            </ul>`;
     };
 
     //return Intern html template
