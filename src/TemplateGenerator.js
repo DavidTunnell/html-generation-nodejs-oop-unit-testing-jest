@@ -1,4 +1,5 @@
 const fs = require('fs');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Engineer = require('../lib/Engineer.js');
 const Intern = require('../lib/Intern.js');
 const Manager = require('../lib/Manager.js');
@@ -37,7 +38,7 @@ class TemplateGenerator {
             } else if (currentObjectType == "Intern") {
                 employeeDetails = this.getHtmlInternDetails(employee.getId(), employee.getEmail(), employee.getSchool());
             }
-            innerHtml += this.getHtmlEmployeeString(employee.getName(), employee.description, employee.imageUrl, employeeDetails);
+            innerHtml += this.getHtmlEmployeeString(employee.getName(), employee.description, currentObjectType, employee.imageUrl, employeeDetails);
         }
         return `
         <!DOCTYPE html>
@@ -71,7 +72,10 @@ class TemplateGenerator {
     };
 
     //return manager html template
-    getHtmlEmployeeString(name, description, imageUrl, employeeDetails) {
+    getHtmlEmployeeString(name, description, title, imageUrl, employeeDetails) {
+
+        console.log(this.imageExists(imageUrl));
+
         //https://source.unsplash.com/800x600/?professional
         return `
         <div class="column">
@@ -84,7 +88,7 @@ class TemplateGenerator {
                 <div class="card-content">
                     <div class="content">
                         <h4>${name}</h4>
-                        <h2><i class="fas fa-tasks"></i> Manager</h2>
+                        <h2><i class="fas fa-tasks"></i> ${title}</h2>
                         <p>${description}</p>
                         ${employeeDetails}
                     </div>
@@ -125,6 +129,17 @@ class TemplateGenerator {
                 <li>School: ${school}</li>
             </ul>`;
     };
+
+    imageExists(image_url) {
+
+        var http = new XMLHttpRequest();
+
+        http.open('HEAD', image_url, false);
+        http.send();
+
+        return http.status != 404;
+
+    }
 
 }
 
