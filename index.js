@@ -1,27 +1,53 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
+const TemplateGenerator = require('./src/TemplateGenerator.js');
+const Engineer = require('./lib/Engineer.js');
+const Intern = require('./lib/Intern.js');
+const Manager = require('./lib/Manager.js');
 
 //To get unlimited number of entries - http://www.penandpaperprogrammer.com/blog/2018/12/16/repeating-questions-with-inquirerjs
 const collectInputs = async(inputs = [], prompts) => {
     const { again, ...answers } = await inquirer.prompt(prompts);
     const newInputs = [...inputs, answers];
+    //it should return 
     return again ? collectInputs(newInputs, prompts) : newInputs;
 };
 
 const getManagerPrompts = () => {
     const prompts = [{
-            type: 'input',
-            name: 'm1',
-            message: 'Manager q1: '
+            type: "input",
+            name: "managerName",
+            message: "What is the manager's name?"
         },
         {
-            type: 'input',
-            name: 'm2',
-            message: 'manager q2: '
+            type: "input",
+            name: "managerDescription",
+            message: "What is the manager's description?"
         },
         {
-            type: 'confirm',
-            name: 'again',
-            message: 'another manager? ',
+            type: "input",
+            name: "managerImageUrl",
+            message: "What is the manager's image URL?"
+        },
+        {
+            type: "input",
+            name: "managerId",
+            message: "What is the manager's employee ID?"
+        },
+        {
+            type: "input",
+            name: "managerEmail",
+            message: "What is the manager's email address?",
+        },
+        {
+            type: "input",
+            name: "managerOffice",
+            message: "What is the manager's office number?",
+        },
+        {
+            type: "confirm",
+            name: "again",
+            message: "Do you want to add another manager?",
             default: true
         }
     ];
@@ -30,19 +56,39 @@ const getManagerPrompts = () => {
 
 const getEngineerPrompts = () => {
     const prompts = [{
-            type: 'input',
-            name: 'e1',
-            message: 'e q1: '
+            type: "input",
+            name: "engineerName",
+            message: "What is the engineer's name?"
         },
         {
-            type: 'input',
-            name: 'e2',
-            message: 'e q2: '
+            type: "input",
+            name: "engineerDescription",
+            message: "What is the engineer's description?"
         },
         {
-            type: 'confirm',
-            name: 'again',
-            message: 'another e? ',
+            type: "input",
+            name: "engineerImageUrl",
+            message: "What is the engineer's image URL?"
+        },
+        {
+            type: "input",
+            name: "engineerId",
+            message: "What is the engineer's employee ID?"
+        },
+        {
+            type: "input",
+            name: "engineerEmail",
+            message: "What is the engineer's email address?",
+        },
+        {
+            type: "input",
+            name: "engineerGitHub",
+            message: "What is the engineer's GitHub username?",
+        },
+        {
+            type: "confirm",
+            name: "again",
+            message: "Do you want to add another engineer?",
             default: true
         }
     ];
@@ -51,19 +97,39 @@ const getEngineerPrompts = () => {
 
 const getInternPrompts = () => {
     const prompts = [{
-            type: 'input',
-            name: 'i1',
-            message: 'i q1: '
+            type: "input",
+            name: "internName",
+            message: "What is the intern's name?"
         },
         {
-            type: 'input',
-            name: 'i2',
-            message: 'i q2: '
+            type: "input",
+            name: "managerDescription",
+            message: "What is the manager's description?"
         },
         {
-            type: 'confirm',
-            name: 'again',
-            message: 'another i? ',
+            type: "input",
+            name: "managerImageUrl",
+            message: "What is the manager's image URL?"
+        },
+        {
+            type: "input",
+            name: "internId",
+            message: "What is the intern's employee ID?"
+        },
+        {
+            type: "input",
+            name: "internEmail",
+            message: "What is the intern's email address?",
+        },
+        {
+            type: "input",
+            name: "internOffice",
+            message: "What is the intern's office number?",
+        },
+        {
+            type: "confirm",
+            name: "again",
+            message: "Do you want to add another intern?",
             default: true
         }
     ];
@@ -71,13 +137,30 @@ const getInternPrompts = () => {
 };
 
 const main = async() => {
+    const employees = [];
     //get inputs for variable amount of managers, engineers and interns
+    console.log("Welcome to the software team website generator utility. Please answer the following questions about the first manager.");
     const managerInputs = await collectInputs([], getManagerPrompts());
-    const engineerInputs = await collectInputs([], getEngineerPrompts());
-    const internInputs = await collectInputs([], getInternPrompts());
-    console.log(managerInputs);
-    console.log(engineerInputs);
-    console.log(internInputs);
+    for (const element of managerInputs) {
+        const manager = new Manager();
+        manager.employeeName = element.managerName;
+        manager.description = element.managerDescription;
+        manager.imageUrl = element.managerImageUrl;
+        manager.id = element.managerId;
+        manager.email = element.managerEmail;
+        manager.officeNumber = element.managerOffice;
+        employees.push(manager);
+    }
+    console.log(employees);
+
+
+
+    // const engineerInputs = await collectInputs([], getEngineerPrompts());
+    // const internInputs = await collectInputs([], getInternPrompts());
+    // console.log(managerInputs);
+    // console.log(engineerInputs);
+    // console.log(internInputs);
+    //create employee objects and add them all
 };
 
 main();
@@ -96,10 +179,7 @@ main();
 
 // const fs = require('fs');
 // const inquirer = require('inquirer');
-// const TemplateGenerator = require('./src/TemplateGenerator.js');
-// const Engineer = require('./lib/Engineer.js');
-// const Intern = require('./lib/Intern.js');
-// const Manager = require('./lib/Manager.js');
+
 
 // // const obj = new TemplateGenerator("User Input Test");
 // // console.log(obj.userInput);
