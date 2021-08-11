@@ -20,7 +20,15 @@ An example of the output can be seen here: https://davidtunnell.github.io/html-g
 
 ## Install
 
-You will need to run `npm install` to get the required node modules that can be seen in package.json. You can then run the application via command line while in the root project directory with `node ./index.js`. Test can be run by ...
+You will need to run `npm install` to get the required node modules that can be seen in package.json. You can then run the application via command line while in the root project directory with `node ./index.js`. 
+
+## Testing
+
+The project has unit tests created using Jest. To run the tests, navigate to the test directory (./test/) in the command line and run them with the command `npm run test` because the following is in package.json. 
+
+`"scripts": {
+    "test": "jest"
+}`
 
 ## Screenshot
 
@@ -29,6 +37,7 @@ You will need to run `npm install` to get the required node modules that can be 
 [![Everything Is AWESOME](http://i.imgur.com/Ot5DWAW.png)](https://youtu.be/StTqXEQ2l-Y?t=35s "Everything Is AWESOME")
 
 -tests!!!!!!!!!!
+-write demo data
 
 deliverables:
 * A sample HTML file generated using the application must be submitted. <<<<>>>>
