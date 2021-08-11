@@ -11,53 +11,55 @@ const outputLocation = "./docs/";
 
 //run on command: 'node index.js' 
 const main = async() => {
-    const employees = [];
-
-    console.log("Welcome to the software team website generator utility. Please answer the following questions about the teams manager.");
-    //get inputs for variable amount of managers, engineers and interns
-    const managerInputs = await collectInputs([], getManagerPrompts());
-    //iterate over the entries and assign them to manager objects, then add to employees array
-    for (const element of managerInputs) {
-        const manager = new Manager();
-        manager.employeeName = element.managerName;
-        manager.description = element.managerDescription;
-        manager.imageUrl = element.managerImageUrl;
-        manager.id = element.managerId;
-        manager.email = element.managerEmail;
-        manager.officeNumber = element.managerOffice;
-        employees.push(manager);
+    //main function runs when called directly but not for tests - https://codewithhugo.com/node-module-entry-required/
+    if (require.main === module) {
+        const employees = [];
+        console.log("Welcome to the software team website generator utility. Please answer the following questions about the teams manager.");
+        //get inputs for variable amount of managers, engineers and interns
+        const managerInputs = await collectInputs([], getManagerPrompts());
+        //iterate over the entries and assign them to manager objects, then add to employees array
+        for (const element of managerInputs) {
+            const manager = new Manager();
+            manager.employeeName = element.managerName;
+            manager.description = element.managerDescription;
+            manager.imageUrl = element.managerImageUrl;
+            manager.id = element.managerId;
+            manager.email = element.managerEmail;
+            manager.officeNumber = element.managerOffice;
+            employees.push(manager);
+        }
+        console.log("Please answer the following questions about the teams engineer(s).");
+        const engineerInputs = await collectInputs([], getEngineerPrompts());
+        for (const element of engineerInputs) {
+            const engineer = new Engineer();
+            engineer.employeeName = element.engineerName;
+            engineer.description = element.engineerDescription;
+            engineer.imageUrl = element.engineerImageUrl;
+            engineer.id = element.engineerId;
+            engineer.email = element.engineerEmail;
+            engineer.gitHub = element.engineerGitHub;
+            employees.push(engineer);
+        }
+        console.log("Please answer the following questions about the teams intern(s).");
+        const internInputs = await collectInputs([], getInternPrompts());
+        for (const element of internInputs) {
+            const intern = new Intern();
+            intern.employeeName = element.internName;
+            intern.description = element.internDescription;
+            intern.imageUrl = element.internImageUrl;
+            intern.id = element.internId;
+            intern.email = element.internEmail;
+            intern.school = element.internSchool;
+            employees.push(intern);
+        }
+        console.log("Generating HTML and CSS file in ./docs/. Please open ./doc/index.html to see the results.");
+        //get an instance of template generator and use the HTML and CSS it generates to create files
+        const templateGenerator = new TemplateGenerator(employees);
+        writeFile(outputLocation + "hero.css", templateGenerator.cssString);
+        writeFile(outputLocation + "index.html", templateGenerator.htmlString);
+        console.log("Process complete. Exiting.");
+        // process.exit();
     }
-    console.log("Please answer the following questions about the teams engineer(s).");
-    const engineerInputs = await collectInputs([], getEngineerPrompts());
-    for (const element of engineerInputs) {
-        const engineer = new Engineer();
-        engineer.employeeName = element.engineerName;
-        engineer.description = element.engineerDescription;
-        engineer.imageUrl = element.engineerImageUrl;
-        engineer.id = element.engineerId;
-        engineer.email = element.engineerEmail;
-        engineer.gitHub = element.engineerGitHub;
-        employees.push(engineer);
-    }
-    console.log("Please answer the following questions about the teams intern(s).");
-    const internInputs = await collectInputs([], getInternPrompts());
-    for (const element of internInputs) {
-        const intern = new Intern();
-        intern.employeeName = element.internName;
-        intern.description = element.internDescription;
-        intern.imageUrl = element.internImageUrl;
-        intern.id = element.internId;
-        intern.email = element.internEmail;
-        intern.school = element.internSchool;
-        employees.push(intern);
-    }
-    console.log("Generating HTML and CSS file in ./docs/. Please open ./doc/index.html to see the results.");
-    //get an instance of template generator and use the HTML and CSS it generates to create files
-    const templateGenerator = new TemplateGenerator(employees);
-    writeFile(outputLocation + "hero.css", templateGenerator.cssString);
-    writeFile(outputLocation + "index.html", templateGenerator.htmlString);
-    console.log("Process complete. Exiting.");
-    // process.exit();
 };
 
 //Write file https://nodejs.org/en/knowledge/file-system/how-to-write-files-in-nodejs/
@@ -203,3 +205,6 @@ const getInternPrompts = () => {
 
 //run main on startup
 main();
+
+//this is only being exported so it can be used for unit tests (./test/Index.test.js). It should not effect functionality when ran normally.
+module.exports = { getManagerPrompts, collectInputs, writeFile };
