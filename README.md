@@ -30,24 +30,16 @@ The project has unit tests created using Jest. To run the tests, navigate to the
     "test": "jest"
 }`
 
-## Screenshot
+## Screenshots
 
+### Command Line App
 
-## Video Walkthrough
-[![Everything Is AWESOME](http://i.imgur.com/Ot5DWAW.png)](https://youtu.be/StTqXEQ2l-Y?t=35s "Everything Is AWESOME")
+![Run Program](./screenshots/run-program.png)
 
--tests!!!!!!!!!!
--write demo data
+### Unit Tests Run
 
-deliverables:
-* A sample HTML file generated using the application must be submitted. <<<<>>>>
-* Your GitHub repository containing your application code.
-link to readme
- Repository contains a high-quality readme with description and a link to a walkthrough video.
+![Jest Tests](./screenshots/jest-tests.png)
 
--walkthrough vid:
-* The walkthrough video must show all four tests passing from the command line.
-* The walkthrough video must demonstrate how a user would invoke the application from the command line.
-* The walkthrough video must demonstrate how a user would enter responses to all of the prompts in the application.
-* The walkthrough video must demonstrate a generated HTML file that matches the user input.
+### Web Output
 
+![HTML/CSS Output](./screenshots/output.png)
